@@ -139,11 +139,13 @@ public class friendRequestController implements Initializable {
 
         for(VBox box: vbox){
             box.setVisible(false);
+            box.setManaged(false);
         }
 
         for (int i = 0; i < Math.min(friends.length, pendingRequest.size()); i++) {
                 friends[i].setText(pendingRequest.get(i));
                 vbox[i].setVisible(true);
+                vbox[i].setManaged(true);
         }
     }
 

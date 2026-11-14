@@ -48,7 +48,7 @@ public class bookingController implements Initializable {
         childSelection();
         loadBookingDestinations();
         displayBookingDestinations();
-        childChoiceBox.setOnAction(this::destinationSelected);
+        destinationChoiceBox.setOnAction(this::destinationSelected);
     }
 
 
@@ -185,31 +185,30 @@ public class bookingController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            for (int i = 1; i < 8; i++) {
-                allDate.add(currentDate.plusDays(i).toString());
-            }
-
-            for (String date : allDate) {
-                clashing=0;
-
-                for(String filter: prebook) {
-                    if (filter.equals(date)) {
-                        clashing ++;
-                    }
-                }
-                if(clashing==0) {
-                    timeslot.add(date);
-                }
-            }
-
-            for(int i=0; i< timeslot.size(); i++){
-                String n = "[" + (i+1) + "] " + timeslot.get(i) + "\n";
-                timeSlotsTextArea.appendText(n);
-                timeSlotBooking.getItems().add(n);
-            }
-
         }
 
+        for (int i = 1; i < 8; i++) {
+            allDate.add(currentDate.plusDays(i).toString());
+        }
+
+        for (String date : allDate) {
+            clashing = 0;
+
+            for (String filter : prebook) {
+                if (filter.equals(date)) {
+                    clashing++;
+                }
+            }
+            if (clashing == 0) {
+                timeslot.add(date);
+            }
+        }
+
+        for (int i = 0; i < timeslot.size(); i++) {
+            String n = "[" + (i + 1) + "] " + timeslot.get(i) + "\n";
+            timeSlotsTextArea.appendText(n);
+            timeSlotBooking.getItems().add(n);
+        }
     }
 
 

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +27,25 @@ import java.util.Optional;
 public class viewEventController{
     @FXML
     private Stage stage;
+
+    // ------------------------------------------------------------------
+    // DEMO CLOCK — pretend "today" is a fixed date so the seeded 2024
+    // events appear live/upcoming without touching the database.
+    // All date/time comparisons in this app read getDemoNow()/getDemoToday()
+    // Set to null to fall back to the real system clock.
+    // ------------------------------------------------------------------
+    private static final LocalDate DEMO_DATE = LocalDate.of(2024, Month.JUNE, 12); // day of Math Olympiad + RoboCup
+    private static final LocalTime DEMO_TIME = LocalTime.of(9, 0);                  // inside both events' windows
+
+    /** The "today" used by all logic in this app. */
+    public static LocalDate getDemoToday() {
+        return DEMO_DATE != null ? DEMO_DATE : LocalDate.now();
+    }
+
+    /** The "right now" used by all logic in this app. */
+    public static LocalTime getDemoNow() {
+        return DEMO_DATE != null ? DEMO_TIME : LocalTime.now();
+    }
 
     //Live events
 
@@ -313,8 +333,8 @@ public class viewEventController{
 
     public boolean hasLiveEvent() throws ClassNotFoundException {
         List<Event> events = getEventsSortedByDate();
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+        LocalDate currentDate = viewEventController.getDemoToday();
+        LocalTime currentTime = viewEventController.getDemoNow();
 
         for (Event event : events) {
             if (event.getDate().isEqual(currentDate) && event.getEndTime().isAfter(currentTime)) {
@@ -326,8 +346,8 @@ public class viewEventController{
 
     public int countLiveEvents() throws ClassNotFoundException {
         List<Event> events = getEventsSortedByDate();
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+        LocalDate currentDate = viewEventController.getDemoToday();
+        LocalTime currentTime = viewEventController.getDemoNow();
         int liveEventCount = 0;
 
         for (Event event : events) {
@@ -342,7 +362,7 @@ public class viewEventController{
     public List<Event> getUpcomingEvents() throws ClassNotFoundException {
         List<Event> upcomingEvents = new ArrayList<>();
         List<Event> allEvents = getEventsSortedByDate();
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = viewEventController.getDemoToday();
         int count = 0;
 
         for (Event event : allEvents) {
@@ -361,8 +381,8 @@ public class viewEventController{
     public List<Event> getLiveEvents() throws ClassNotFoundException {
         List<Event> liveEvents = new ArrayList<>();
         List<Event> allEvents = getEventsSortedByDate();
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+        LocalDate currentDate = viewEventController.getDemoToday();
+        LocalTime currentTime = viewEventController.getDemoNow();
 
         for (Event event : allEvents) {
             if (event.getDate().isEqual(currentDate) && event.getEndTime().isAfter(currentTime)) {
@@ -410,26 +430,45 @@ public class viewEventController{
 
 
     public void setEventData(List<Event> upcomingEvents) {
-        upEventTitle1.setText(upcomingEvents.get(0).getTitle());
-        upEventDescription1.setText(arrangeLongText(upcomingEvents.get(0).getDescription()));
-        upEventTimeStart1.setText(upcomingEvents.get(0).getStartTime().toString());
-        upEventTimeEnd1.setText(upcomingEvents.get(0).getEndTime().toString());
-        upEventVenue1.setText(upcomingEvents.get(0).getVenue());
-        upEventDate1.setText(upcomingEvents.get(0).getDate().toString());
+        // Guard against empty database — fill only the slots that exist
+        // so the page still loads when there are no future events.
+        Text[] titles = {upEventTitle1, upEventTitle2, upEventTitle3};
+        TextArea[] descriptions = {upEventDescription1, upEventDescription2, upEventDescription3};
+        TextField[] starts = {upEventTimeStart1, upEventTimeStart2, upEventTimeStart3};
+        TextField[] ends = {upEventTimeEnd1, upEventTimeEnd2, upEventTimeEnd3};
+        TextField[] venues = {upEventVenue1, upEventVenue2, upEventVenue3};
+        TextField[] dates = {upEventDate1, upEventDate2, upEventDate3};
+        VBox[] slots = {event1, event2, event3};
 
-        upEventTitle2.setText(upcomingEvents.get(1).getTitle());
-        upEventDescription2.setText(arrangeLongText(upcomingEvents.get(1).getDescription()));
-        upEventTimeStart2.setText(upcomingEvents.get(1).getStartTime().toString());
-        upEventTimeEnd2.setText(upcomingEvents.get(1).getEndTime().toString());
-        upEventVenue2.setText(upcomingEvents.get(1).getVenue());
-        upEventDate2.setText(upcomingEvents.get(1).getDate().toString());
-
-        upEventTitle3.setText(upcomingEvents.get(2).getTitle());
-        upEventDescription3.setText(arrangeLongText(upcomingEvents.get(2).getDescription()));
-        upEventTimeStart3.setText(upcomingEvents.get(2).getStartTime().toString());
-        upEventTimeEnd3.setText(upcomingEvents.get(2).getEndTime().toString());
-        upEventVenue3.setText(upcomingEvents.get(2).getVenue());
-        upEventDate3.setText(upcomingEvents.get(2).getDate().toString());
+        for (int i = 0; i < 3; i++) {
+            if (i < upcomingEvents.size()) {
+                Event e = upcomingEvents.get(i);
+                titles[i].setText(e.getTitle());
+                descriptions[i].setText(e.getDescription());
+                starts[i].setText(e.getStartTime().toString());
+                ends[i].setText(e.getEndTime().toString());
+                venues[i].setText(e.getVenue());
+                dates[i].setText(e.getDate().toString());
+                if (slots[i] != null) {
+                    slots[i].setVisible(true);
+                    slots[i].setManaged(true);
+                }
+            } else {
+                titles[i].setText("No upcoming event");
+                descriptions[i].setText("");
+                starts[i].setText("");
+                ends[i].setText("");
+                venues[i].setText("");
+                dates[i].setText("");
+                if (slots[i] != null) {
+                    slots[i].setVisible(false);
+                    slots[i].setManaged(false);
+                }
+                if ("Register".equals(new Button[]{upEventRegister1, upEventRegister2, upEventRegister3}[i].getText())) {
+                    new Button[]{upEventRegister1, upEventRegister2, upEventRegister3}[i].setDisable(true);
+                }
+            }
+        }
     }
 
     public void initialize() {
@@ -437,7 +476,7 @@ public class viewEventController{
             List<Event> upcomingEvents = getUpcomingEvents();
             List<Event> liveEvents = getLiveEvents();
             setEventData(upcomingEvents);
-            LocalTime currentTime = LocalTime.now();
+            LocalTime currentTime = viewEventController.getDemoNow();
             message.setVisible(false);
             Text[] eventTitle = {liveEventTitle1,liveEventTitle2,liveEventTitle3,upEventTitle1,upEventTitle2,upEventTitle3};
             Button[] registerButton= {liveRegister1,liveRegister2,liveRegister3,upEventRegister1,upEventRegister2,upEventRegister3};
@@ -504,12 +543,6 @@ public class viewEventController{
                 live2.setManaged(false);  //layout
                 live3.setManaged(false);  //layout
 
-
-                double height = 1585;
-
-
-                viewEvent.setPrefHeight(height);
-
             }else if (countLiveEvents()==2){
                 System.out.println("Live events=2");
                 liveEventTitle1.setVisible(true);
@@ -531,7 +564,7 @@ public class viewEventController{
                 //live event set text
                 liveEventTitle1.setText(liveEvents.get(0).getTitle());
                 liveEventDate1.setText(liveEvents.get(0).getTitle());
-                liveEventDescription1.setText(arrangeLongText(liveEvents.get(0).getDescription()));
+                liveEventDescription1.setText(liveEvents.get(0).getDescription());
                 liveEventTimeStart1.setText(liveEvents.get(0).getStartTime().toString());
                 liveEventTimeEnd1.setText(liveEvents.get(0).getEndTime().toString());
                 liveEventVenue1.setText(liveEvents.get(0).getVenue());
@@ -539,14 +572,12 @@ public class viewEventController{
 
                 liveEventTitle2.setText(liveEvents.get(1).getTitle());
                 liveEventDate2.setText(liveEvents.get(1).getTitle());
-                liveEventDescription2.setText(arrangeLongText(liveEvents.get(1).getDescription()));
+                liveEventDescription2.setText(liveEvents.get(1).getDescription());
                 liveEventTimeStart2.setText(liveEvents.get(1).getStartTime().toString());
                 liveEventTimeEnd2.setText(liveEvents.get(1).getEndTime().toString());
                 liveEventVenue2.setText(liveEvents.get(1).getVenue());
                 liveEventDate2.setText(liveEvents.get(1).getDate().toString());
 
-                double height = 1795;
-                viewEvent.setPrefHeight(height);
 
 
             }else if (countLiveEvents()==3){
@@ -569,7 +600,7 @@ public class viewEventController{
                 //live event set text
                 liveEventTitle1.setText(liveEvents.get(0).getTitle());
                 liveEventDate1.setText(liveEvents.get(0).getTitle());
-                liveEventDescription1.setText(arrangeLongText(liveEvents.get(0).getDescription()));
+                liveEventDescription1.setText(liveEvents.get(0).getDescription());
                 liveEventTimeStart1.setText(liveEvents.get(0).getStartTime().toString());
                 liveEventTimeEnd1.setText(liveEvents.get(0).getEndTime().toString());
                 liveEventVenue1.setText(liveEvents.get(0).getVenue());
@@ -577,7 +608,7 @@ public class viewEventController{
 
                 liveEventTitle2.setText(liveEvents.get(1).getTitle());
                 liveEventDate2.setText(liveEvents.get(1).getTitle());
-                liveEventDescription2.setText(arrangeLongText(liveEvents.get(1).getDescription()));
+                liveEventDescription2.setText(liveEvents.get(1).getDescription());
                 liveEventTimeStart2.setText(liveEvents.get(1).getStartTime().toString());
                 liveEventTimeEnd2.setText(liveEvents.get(1).getEndTime().toString());
                 liveEventVenue2.setText(liveEvents.get(1).getVenue());
@@ -585,14 +616,12 @@ public class viewEventController{
 
                 liveEventTitle3.setText(liveEvents.get(2).getTitle());
                 liveEventDate3.setText(liveEvents.get(2).getTitle());
-                liveEventDescription3.setText(arrangeLongText(liveEvents.get(2).getDescription()));
+                liveEventDescription3.setText(liveEvents.get(2).getDescription());
                 liveEventTimeStart3.setText(liveEvents.get(2).getStartTime().toString());
                 liveEventTimeEnd3.setText(liveEvents.get(2).getEndTime().toString());
                 liveEventVenue3.setText(liveEvents.get(2).getVenue());
                 liveEventDate3.setText(liveEvents.get(2).getDate().toString());
 
-                double height = 2035;
-                viewEvent.setPrefHeight(height);
 
             }else if (countLiveEvents()==1){
                 System.out.println("Live events=1");
@@ -616,14 +645,12 @@ public class viewEventController{
                 //live event set text
                 liveEventTitle1.setText(liveEvents.get(0).getTitle());
                 liveEventDate1.setText(liveEvents.get(0).getTitle());
-                liveEventDescription1.setText(arrangeLongText(liveEvents.get(0).getDescription()));
+                liveEventDescription1.setText(liveEvents.get(0).getDescription());
                 liveEventTimeStart1.setText(liveEvents.get(0).getStartTime().toString());
                 liveEventTimeEnd1.setText(liveEvents.get(0).getEndTime().toString());
                 liveEventVenue1.setText(liveEvents.get(0).getVenue());
                 liveEventDate1.setText(liveEvents.get(0).getDate().toString());
 
-                double height = 1585;
-                viewEvent.setPrefHeight(height);
 
             }
         } catch (ClassNotFoundException e) {
@@ -739,7 +766,7 @@ public class viewEventController{
         Button clickedButton = (Button) event.getSource();
         List<Event> upcomingEvents = getUpcomingEvents();
         List<Event> liveEvents = getLiveEvents();
-        LocalTime currentTime = LocalTime.now();
+        LocalTime currentTime = viewEventController.getDemoNow();
         if (!isYoungStudent()){
             showError("Only Young Students are allowed to register events.");
         }else{
@@ -873,7 +900,7 @@ public class viewEventController{
 
         String File = "src/main/java/Data/registerEvent.csv";
         String line;
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = viewEventController.getDemoToday();
         List<Event> events = getEventsSortedByDate();
 
         try (BufferedReader br = new BufferedReader(new FileReader(File))) {

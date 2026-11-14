@@ -229,11 +229,13 @@ public class FriendListViewController implements Initializable {
 
         for(VBox box: vbox){
             box.setVisible(false);
+            box.setManaged(false);
         }
 
         for (int i = 0; i < Math.min(friends.length, friendList.size()); i++) {
             friends[i].setText(friendList.get(i));
             vbox[i].setVisible(true);
+            vbox[i].setManaged(true);
         }
     }
 

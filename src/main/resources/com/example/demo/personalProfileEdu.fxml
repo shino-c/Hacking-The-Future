@@ -5,175 +5,96 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="657.0" style="-fx-background-color: ffdde6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.personalProfileEduController">
-   <children>
-      <HBox prefHeight="73.0" prefWidth="629.0" style="-fx-background-color: ffe4e1;">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="@../../../CssStyle/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.personalProfileEduController">
+   <top>
+      <HBox alignment="CENTER_LEFT" maxWidth="Infinity" minHeight="64.0" maxHeight="64.0" prefHeight="64.0" spacing="6.0" styleClass="nav-bar">
          <children>
-            <ImageView fitHeight="53.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </HBox.margin>
+            <ImageView fitHeight="48.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
                <image>
-                  <Image url="@../../../logowithbg.png" />
+                  <Image url="@../../../logowithoutbg.png" />
                </image>
-            </ImageView>
-            <Pane prefHeight="73.0" prefWidth="594.0">
                <HBox.margin>
-                  <Insets left="100.0" />
+                  <Insets left="10.0" />
                </HBox.margin>
-            </Pane>
-            <HBox alignment="TOP_RIGHT" prefHeight="73.0" prefWidth="772.0">
+            </ImageView>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#homeButton" styleClass="barItem" text="Home" />
+            <Button mnemonicParsing="false" onAction="#quizButton" styleClass="barItem" text="Quiz" />
+            <Button mnemonicParsing="false" onAction="#eventButton" styleClass="barItem" text="Event" />
+            <Button mnemonicParsing="false" onAction="#bookingButton" styleClass="barItem" text="Booking" />
+            <Button mnemonicParsing="false" onAction="#leaderBoardButton" styleClass="barItem" text="LeaderBoard" />
+            <Button mnemonicParsing="false" onAction="#profileButton" styleClass="barItem,active" text="Profile" />
+            <Button mnemonicParsing="false" onAction="#logOutButton" styleClass="barItem" text="Log Out" />
+         </children>
+         <padding>
+            <Insets bottom="6.0" right="12.0" top="6.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER">
+         <padding>
+            <Insets bottom="30.0" left="40.0" right="40.0" />
+         </padding>
+         <children>
+      <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-center" text="My Profile">
+         <VBox.margin>
+            <Insets top="44.0" />
+         </VBox.margin>
+      </Text>
+      <VBox maxWidth="760.0" spacing="10.0" styleClass="card-solid">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#homeButton" prefHeight="73.0" prefWidth="78.0" style="-fx-background-color: NONE;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="Home">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#quizButton" prefHeight="73.0" prefWidth="73.0" style="-fx-background-color: none;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="Quiz">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#eventButton" prefHeight="73.0" prefWidth="75.0" style="-fx-background-color: none;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="Event">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#bookingButton" prefHeight="73.0" prefWidth="81.0" style="-fx-background-color: none;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="Booking">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#leaderBoardButton" prefHeight="79.0" prefWidth="111.0" style="-fx-background-color: none;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="LeaderBoard">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#profileButton" prefHeight="77.0" prefWidth="63.0" style="-fx-background-color: ffb6c1;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="Profile">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOutButton" prefHeight="73.0" prefWidth="75.0" style="-fx-background-color: none;" styleClass="barItem" stylesheets="@../../../CssStyle/home.css" text="Log Out">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </Button>
+                  <Text fill="#374a72" wrappingWidth="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Email" />
+                  <Label fx:id="email" maxWidth="Infinity" styleClass="field-chip" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Text fill="#374a72" wrappingWidth="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Username" />
+                  <Label fx:id="username" maxWidth="Infinity" styleClass="field-chip" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Text fill="#374a72" wrappingWidth="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="👤 Role" />
+                  <Label fx:id="role" maxWidth="Infinity" styleClass="field-chip" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Text fill="#374a72" wrappingWidth="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="📍 Coordinate" />
+                  <Label fx:id="coords" maxWidth="Infinity" styleClass="field-chip" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Text fill="#374a72" wrappingWidth="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="📖 Created Event" />
+                  <Label fx:id="event" maxWidth="Infinity" styleClass="field-chip" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Text fill="#374a72" wrappingWidth="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="❓ Created Quiz" />
+                  <Label fx:id="quiz" maxWidth="Infinity" styleClass="field-chip" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
-      </HBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="815.0" style="-fx-background-color: rgba(255,255,255,.5); -fx-background-radius: 20;">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="40.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="email" text="Label">
-               <VBox.margin>
-                  <Insets left="200.0" top="-18.0" />
-               </VBox.margin>
-            </Label>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="username" text="Label">
-               <VBox.margin>
-                  <Insets left="200.0" top="-18.0" />
-               </VBox.margin>
-            </Label>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="👤  Role">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="60.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="role" text="Label">
-               <VBox.margin>
-                  <Insets left="200.0" top="-18.0" />
-               </VBox.margin>
-            </Label>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="📍  Coordinate">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="coords" text="Label">
-               <VBox.margin>
-                  <Insets left="200.0" top="-18.0" />
-               </VBox.margin>
-            </Label>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="⛀  Created Event">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="event" text="Label">
-               <VBox.margin>
-                  <Insets left="200.0" top="-18.0" />
-               </VBox.margin>
-            </Label>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="❓  Created Quiz">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="quiz" text="Label">
-               <VBox.margin>
-                  <Insets left="200.0" top="-18.0" />
-               </VBox.margin>
-            </Label>
-         </children>
+         <padding>
+            <Insets bottom="22.0" left="22.0" right="22.0" top="22.0" />
+         </padding>
          <VBox.margin>
-            <Insets bottom="100.0" top="100.0" />
+            <Insets top="16.0" />
          </VBox.margin>
       </VBox>
-   </children>
-</VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

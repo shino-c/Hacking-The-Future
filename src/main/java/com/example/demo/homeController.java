@@ -4,12 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
@@ -41,25 +46,45 @@ public class homeController implements Initializable {
     @FXML
     private Text DiscussionErrorMessage;
     @FXML
-    private TextArea forum1;
+    private Label forum1;
     @FXML
-    private TextArea forum2;
+    private Label forum2;
     @FXML
-    private TextArea forum3;
+    private Label forum3;
     @FXML
-    private TextArea forum4;
+    private Label forum4;
     @FXML
-    private TextArea forum5;
+    private Label forum5;
     @FXML
-    private TextArea forum6;
+    private Label forum6;
     @FXML
-    private TextArea forum7;
+    private Label forum7;
     @FXML
-    private TextArea forum8;
+    private Label forum8;
     @FXML
-    private TextArea forum9;
+    private Label forum9;
     @FXML
-    private TextArea forum10;
+    private Label forum10;
+    @FXML
+    private VBox forumPost1;
+    @FXML
+    private VBox forumPost2;
+    @FXML
+    private VBox forumPost3;
+    @FXML
+    private VBox forumPost4;
+    @FXML
+    private VBox forumPost5;
+    @FXML
+    private VBox forumPost6;
+    @FXML
+    private VBox forumPost7;
+    @FXML
+    private VBox forumPost8;
+    @FXML
+    private VBox forumPost9;
+    @FXML
+    private VBox forumPost10;
 
     String usernamelogin = loginController.HostUsername;
     public static String roleCon;
@@ -104,17 +129,6 @@ public class homeController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        adjustTextAreaHeight(forum1);
-        adjustTextAreaHeight(forum2);
-        adjustTextAreaHeight(forum3);
-        adjustTextAreaHeight(forum4);
-        adjustTextAreaHeight(forum5);
-        adjustTextAreaHeight(forum6);
-        adjustTextAreaHeight(forum7);
-        adjustTextAreaHeight(forum8);
-        adjustTextAreaHeight(forum9);
-        adjustTextAreaHeight(forum10);
-
         printForums();
     }
 
@@ -127,24 +141,6 @@ public class homeController implements Initializable {
 
         printForums();
     }
-
-    private void adjustTextAreaHeight(TextArea textArea) {
-        textArea.textProperty().addListener((obs, oldValue, newValue) -> {
-            // Calculate the number of lines in the TextArea
-            int numLines = newValue.split("\n").length;
-
-            // Adjust the height based on the number of lines
-            double defaultHeight = 24.0; // Default height of one row
-            double lineHeight = 1.2; // Line height factor
-            double minHeight = 30.0; // Minimum height
-            double maxHeight = 200.0; // Maximum height
-            double newHeight = Math.min(Math.max(minHeight, numLines * defaultHeight * lineHeight), maxHeight);
-
-            // Set the new height to the TextArea
-            textArea.setPrefHeight(newHeight);
-        });
-    }
-
 
     @FXML
     public void homeStartUp(ActionEvent event) throws Exception  {
@@ -333,6 +329,111 @@ public class homeController implements Initializable {
         }
     }
 
+    private void populateForum(VBox post, Label content, String entry) {
+        VBox replies = findRepliesBox(post);
+        if (replies != null) {
+            replies.getChildren().clear();
+            replies.setVisible(false);
+            replies.setManaged(false);
+        }
+
+        Label user = findLabel(post, "forum-username");
+        Label date = findLabel(post, "forum-date");
+
+        if (entry == null || entry.trim().isEmpty()) {
+            if (user != null) {
+                user.setText("");
+            }
+            if (date != null) {
+                date.setText("");
+            }
+            content.setText("");
+            return;
+        }
+
+        String[] lines = entry.split("\n", -1);
+        if (user != null) {
+            user.setText(lines.length > 0 ? lines[0].trim() : "");
+        }
+        if (date != null) {
+            date.setText(lines.length > 1 ? lines[1].trim() : "");
+        }
+        content.setText(lines.length > 2 ? lines[2].trim() : "");
+
+        if (replies != null && lines.length > 3) {
+            int index = 3;
+            while (index < lines.length) {
+                while (index < lines.length && lines[index].trim().isEmpty()) {
+                    index++;
+                }
+                if (index >= lines.length) {
+                    break;
+                }
+
+                String userLine = lines[index++];
+                int depth = 0;
+                while (depth < userLine.length() && userLine.charAt(depth) == '\t') {
+                    depth++;
+                }
+                String replyUser = userLine.trim();
+                String replyDate = index < lines.length ? lines[index++].trim() : "";
+                String replyText = index < lines.length ? lines[index++].trim() : "";
+
+                replies.getChildren().add(createReplyNode(replyUser, replyDate, replyText, depth));
+            }
+
+            if (!replies.getChildren().isEmpty()) {
+                replies.setVisible(true);
+                replies.setManaged(true);
+            }
+        }
+    }
+
+    private Label findLabel(Parent parent, String styleClass) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            if (node instanceof Label && node.getStyleClass().contains(styleClass)) {
+                return (Label) node;
+            }
+            if (node instanceof Parent) {
+                Label found = findLabel((Parent) node, styleClass);
+                if (found != null) {
+                    return found;
+                }
+            }
+        }
+        return null;
+    }
+
+    private VBox findRepliesBox(Parent parent) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            if (node instanceof VBox && node.getStyleClass().contains("forum-replies")) {
+                return (VBox) node;
+            }
+        }
+        return null;
+    }
+
+    private VBox createReplyNode(String user, String date, String text, int depth) {
+        Label userLabel = new Label(user);
+        userLabel.getStyleClass().add("reply-username");
+
+        Label dateLabel = new Label(date);
+        dateLabel.getStyleClass().add("reply-date");
+
+        HBox header = new HBox(8.0, userLabel, dateLabel);
+        header.setAlignment(Pos.CENTER_LEFT);
+
+        Label content = new Label(text);
+        content.setWrapText(true);
+        content.setMaxWidth(Double.MAX_VALUE);
+        content.getStyleClass().add("reply-content");
+
+        VBox reply = new VBox(4.0, header, content);
+        reply.getStyleClass().add("forum-reply");
+        reply.setPadding(new Insets(0, 0, 0, Math.max(0, depth - 1) * 16));
+        return reply;
+    }
+
     public void printForums(){
         getTotalDiscussion();
         printForum1();
@@ -350,7 +451,7 @@ public class homeController implements Initializable {
     public void printForum1() {
         int index = numOfEntry;
         if (index <= 0) {
-            forum1.setText("");
+            populateForum(forumPost1, forum1, "");
         } else {
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -361,8 +462,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum1.setText(entryBuilder.toString().trim());
-                    getUserID1 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost1, forum1, entry);
+                    getUserID1 = entry;
                 }
             } catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -374,7 +476,7 @@ public class homeController implements Initializable {
     public void printForum2() {
         int index = numOfEntry - 1;
         if (index <= 0) {
-            forum2.setText("");
+            populateForum(forumPost2, forum2, "");
         } else {
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -385,8 +487,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum2.setText(entryBuilder.toString().trim());
-                    getUserID2 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost2, forum2, entry);
+                    getUserID2 = entry;
                 }
             } catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -397,7 +500,7 @@ public class homeController implements Initializable {
     public void printForum3(){
         int index = numOfEntry - 2;
         if (index <= 0){
-            forum3.setText("");
+            populateForum(forumPost3, forum3, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -408,8 +511,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum3.setText(entryBuilder.toString().trim());
-                    getUserID3 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost3, forum3, entry);
+                    getUserID3 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -420,7 +524,7 @@ public class homeController implements Initializable {
     public void printForum4(){
         int index = numOfEntry - 3;
         if (index <= 0){
-            forum4.setText("");
+            populateForum(forumPost4, forum4, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -431,8 +535,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum4.setText(entryBuilder.toString().trim());
-                    getUserID4 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost4, forum4, entry);
+                    getUserID4 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -443,7 +548,7 @@ public class homeController implements Initializable {
     public void printForum5(){
         int index = numOfEntry - 4;
         if (index <= 0){
-            forum5.setText("");
+            populateForum(forumPost5, forum5, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -454,8 +559,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum5.setText(entryBuilder.toString().trim());
-                    getUserID5 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost5, forum5, entry);
+                    getUserID5 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -466,7 +572,7 @@ public class homeController implements Initializable {
     public void printForum6(){
         int index = numOfEntry - 5;
         if (index <= 0){
-            forum6.setText("");
+            populateForum(forumPost6, forum6, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -477,8 +583,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum6.setText(entryBuilder.toString().trim());
-                    getUserID6 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost6, forum6, entry);
+                    getUserID6 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -489,7 +596,7 @@ public class homeController implements Initializable {
     public void printForum7(){
         int index = numOfEntry - 6;
         if (index <= 0){
-            forum7.setText("");
+            populateForum(forumPost7, forum7, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -500,8 +607,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum7.setText(entryBuilder.toString().trim());
-                    getUserID7 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost7, forum7, entry);
+                    getUserID7 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -512,7 +620,7 @@ public class homeController implements Initializable {
     public void printForum8(){
         int index = numOfEntry - 7;
         if (index <= 0){
-            forum8.setText("");
+            populateForum(forumPost8, forum8, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -523,8 +631,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum8.setText(entryBuilder.toString().trim());
-                    getUserID8 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost8, forum8, entry);
+                    getUserID8 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -535,7 +644,7 @@ public class homeController implements Initializable {
     public void printForum9(){
         int index = numOfEntry - 8;
         if (index <= 0){
-            forum9.setText("");
+            populateForum(forumPost9, forum9, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -546,8 +655,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum9.setText(entryBuilder.toString().trim());
-                    getUserID9 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost9, forum9, entry);
+                    getUserID9 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
@@ -558,7 +668,7 @@ public class homeController implements Initializable {
     public void printForum10(){
         int index = numOfEntry - 9;
         if (index <= 0){
-            forum10.setText("");
+            populateForum(forumPost10, forum10, "");
         }else{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileNameDiscussion))) {
                 for (int i = 0; i < index; i++) {
@@ -569,8 +679,9 @@ public class homeController implements Initializable {
                         entryBuilder.append(line).append("\n");
                     }
                     // Set the text in the forum1 TextField
-                    forum10.setText(entryBuilder.toString().trim());
-                    getUserID10 = entryBuilder.toString().trim();
+                    String entry = entryBuilder.toString().trim();
+                    populateForum(forumPost10, forum10, entry);
+                    getUserID10 = entry;
                 }
             }catch (IOException e) {
                 showError("Error reading user data from file: " + e.getMessage());
