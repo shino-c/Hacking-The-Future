@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="@../../../CssStyle/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.viewEventController">
+   <top>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="Infinity" minHeight="64.0" maxHeight="64.0" prefHeight="64.0" spacing="6.0" styleClass="nav-bar">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                     <image>
+                        <Image url="@../../../logowithoutbg.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#homeButton" styleClass="barItem" text="Home" />
+                  <Button mnemonicParsing="false" onAction="#quizButton" styleClass="barItem" text="Quiz" />
+                  <Button mnemonicParsing="false" onAction="#eventButton" styleClass="barItem,active" text="Event" />
+                  <Button mnemonicParsing="false" onAction="#bookingButton" styleClass="barItem" text="Booking" />
+                  <Button mnemonicParsing="false" onAction="#leaderBoardButton" styleClass="barItem" text="LeaderBoard" />
+                  <Button mnemonicParsing="false" onAction="#profileButton" styleClass="barItem" text="Profile" />
+                  <Button mnemonicParsing="false" onAction="#logOutButton" styleClass="barItem" text="Log Out" />
+               </children>
+               <padding>
+                  <Insets bottom="6.0" right="12.0" top="6.0" />
+               </padding>
+            </HBox>
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-center" text="Events">
+               <VBox.margin>
+                  <Insets top="44.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <ScrollPane fx:id="viewEventScroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="card" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="viewEvent" alignment="TOP_CENTER" spacing="14.0">
+               <children>
+                  <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="🔴 Live Now" />
+                  <VBox fx:id="live1" spacing="8.0" styleClass="card-solid">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <Text fx:id="liveEventTitle1" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                              <ImageView fx:id="liveTime1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../clock.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventTimeStart1" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-start" text="START" />
+                              <ImageView fx:id="liveTimeArrow1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventTimeEnd1" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-end" text="END" />
+                           </children>
+                        </HBox>
+                         <Text fx:id="message" fill="#5b6b8c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body-text" text="There are no live events at the moment. Please check back again tomorrow." wrappingWidth="600" />
+                        <TextArea fx:id="liveEventDescription1" editable="false" maxWidth="Infinity" minWidth="0.0" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <ImageView fx:id="liveCalendar1" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Calendar.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventDate1" editable="false" alignment="CENTER" maxWidth="130.0" prefHeight="32.0" styleClass="chip-date" text="DATE" />
+                              <ImageView fx:id="liveLocation1" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Location.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventVenue1" editable="false" alignment="CENTER" maxWidth="260.0" prefHeight="32.0" styleClass="chip-venue" text="VENUE" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="liveRegister1" mnemonicParsing="false" onAction="#registerEvent" styleClass="btn-primary" text="Register" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="live2" spacing="8.0" styleClass="card-solid">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <Text fx:id="liveEventTitle2" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                              <ImageView fx:id="liveTime2" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../clock.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventTimeStart2" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-start" text="START" />
+                              <ImageView fx:id="liveTimeArrow2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventTimeEnd2" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-end" text="END" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="liveEventDescription2" editable="false" maxWidth="Infinity" minWidth="0.0" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <ImageView fx:id="liveCalendar2" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Calendar.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventDate2" editable="false" alignment="CENTER" maxWidth="130.0" prefHeight="32.0" styleClass="chip-date" text="DATE" />
+                              <ImageView fx:id="liveLocation2" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Location.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventVenue2" editable="false" alignment="CENTER" maxWidth="260.0" prefHeight="32.0" styleClass="chip-venue" text="VENUE" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="liveRegister2" mnemonicParsing="false" onAction="#registerEvent" styleClass="btn-primary" text="Register" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="live3" spacing="8.0" styleClass="card-solid">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <Text fx:id="liveEventTitle3" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                              <ImageView fx:id="liveTime3" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../clock.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventTimeStart3" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-start" text="START" />
+                              <ImageView fx:id="liveTimeArrow3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventTimeEnd3" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-end" text="END" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="liveEventDescription3" editable="false" maxWidth="Infinity" minWidth="0.0" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <ImageView fx:id="liveCalendar3" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Calendar.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventDate3" editable="false" alignment="CENTER" maxWidth="130.0" prefHeight="32.0" styleClass="chip-date" text="DATE" />
+                              <ImageView fx:id="liveLocation3" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Location.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="liveEventVenue3" editable="false" alignment="CENTER" maxWidth="260.0" prefHeight="32.0" styleClass="chip-venue" text="VENUE" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="liveRegister3" mnemonicParsing="false" onAction="#registerEvent" styleClass="btn-primary" text="Register" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="🔜 Upcoming Events">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Text>
+                  <VBox fx:id="event1" spacing="8.0" styleClass="card-solid">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <Text fx:id="upEventTitle1" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="upEventTimeStart1" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-start" text="START" />
+                              <TextField fx:id="upEventTimeEnd1" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-end" text="END" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="upEventDescription1" editable="false" maxWidth="Infinity" minWidth="0.0" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <TextField fx:id="upEventDate1" editable="false" alignment="CENTER" maxWidth="130.0" prefHeight="32.0" styleClass="chip-date" text="DATE" />
+                              <TextField fx:id="upEventVenue1" editable="false" alignment="CENTER" maxWidth="260.0" prefHeight="32.0" styleClass="chip-venue" text="VENUE" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="upEventRegister1" mnemonicParsing="false" onAction="#registerEvent" styleClass="btn-primary" text="Register" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="event2" spacing="8.0" styleClass="card-solid">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <Text fx:id="upEventTitle2" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="upEventTimeStart2" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-start" text="START" />
+                              <TextField fx:id="upEventTimeEnd2" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-end" text="END" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="upEventDescription2" editable="false" maxWidth="Infinity" minWidth="0.0" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <TextField fx:id="upEventDate2" editable="false" alignment="CENTER" maxWidth="130.0" prefHeight="32.0" styleClass="chip-date" text="DATE" />
+                              <TextField fx:id="upEventVenue2" editable="false" alignment="CENTER" maxWidth="260.0" prefHeight="32.0" styleClass="chip-venue" text="VENUE" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="upEventRegister2" mnemonicParsing="false" onAction="#registerEvent" styleClass="btn-primary" text="Register" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="event3" spacing="8.0" styleClass="card-solid">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <Text fx:id="upEventTitle3" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="upEventTimeStart3" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-start" text="START" />
+                              <TextField fx:id="upEventTimeEnd3" editable="false" alignment="CENTER" maxWidth="110.0" prefHeight="32.0" styleClass="chip-time-end" text="END" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="upEventDescription3" editable="false" maxWidth="Infinity" minWidth="0.0" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="10.0">
+                           <children>
+                              <TextField fx:id="upEventDate3" editable="false" alignment="CENTER" maxWidth="130.0" prefHeight="32.0" styleClass="chip-date" text="DATE" />
+                              <TextField fx:id="upEventVenue3" editable="false" alignment="CENTER" maxWidth="260.0" prefHeight="32.0" styleClass="chip-venue" text="VENUE" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="upEventRegister3" mnemonicParsing="false" onAction="#registerEvent" styleClass="btn-primary" text="Register" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

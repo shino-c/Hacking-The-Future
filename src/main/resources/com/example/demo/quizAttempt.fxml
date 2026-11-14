@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="@../../../CssStyle/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.attemptQuizController">
+   <top>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="Infinity" minHeight="64.0" maxHeight="64.0" prefHeight="64.0" spacing="6.0" styleClass="nav-bar">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                     <image>
+                        <Image url="@../../../logowithoutbg.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#homeButton" styleClass="barItem" text="Home" />
+                  <Button mnemonicParsing="false" onAction="#quizButton" styleClass="barItem,active" text="Quiz" />
+                  <Button mnemonicParsing="false" onAction="#eventButton" styleClass="barItem" text="Event" />
+                  <Button mnemonicParsing="false" onAction="#bookingButton" styleClass="barItem" text="Booking" />
+                  <Button mnemonicParsing="false" onAction="#leaderBoardButton" styleClass="barItem" text="LeaderBoard" />
+                  <Button mnemonicParsing="false" onAction="#profileButton" styleClass="barItem" text="Profile" />
+                  <Button mnemonicParsing="false" onAction="#logOutButton" styleClass="barItem" text="Log Out" />
+               </children>
+               <padding>
+                  <Insets bottom="6.0" right="12.0" top="6.0" />
+               </padding>
+            </HBox>
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-center" text="Attempt Quiz">
+               <VBox.margin>
+                  <Insets top="44.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <VBox spacing="14.0" styleClass="card" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Filter:" />
+            <CheckBox fx:id="Science" mnemonicParsing="false" styleClass="check" text="Science" />
+            <CheckBox fx:id="Technology" mnemonicParsing="false" styleClass="check" text="Technology" />
+            <CheckBox fx:id="Engineering" mnemonicParsing="false" styleClass="check" text="Engineering" />
+            <CheckBox fx:id="Mathematics" mnemonicParsing="false" styleClass="check" text="Mathematics" />
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="card" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="quizzesContainer" alignment="TOP_CENTER" spacing="14.0">
+               <children>
+                   <VBox fx:id="quiz1" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle1" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme1" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription1" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt1" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz2" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle2" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme2" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription2" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt2" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz3" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle3" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme3" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription3" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt3" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz4" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle4" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme4" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription4" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt4" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz5" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle5" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme5" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription5" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt5" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz6" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle6" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme6" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription6" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt6" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz7" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle7" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme7" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription7" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt7" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz8" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle8" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme8" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription8" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt8" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz9" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle9" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme9" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription9" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt9" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz10" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle10" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme10" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription10" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt10" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz11" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle11" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme11" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription11" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt11" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz12" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle12" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme12" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription12" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt12" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz13" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle13" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme13" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription13" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt13" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz14" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle14" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme14" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription14" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt14" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+                   <VBox fx:id="quiz15" spacing="8.0" styleClass="card-solid">
+                      <children>
+                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="12.0">
+                            <children>
+                               <Text fx:id="quizTitle15" fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="quizTheme15" editable="false" alignment="CENTER" maxWidth="160.0" prefHeight="30.0" styleClass="badge-theme" text="THEME" />
+                            </children>
+                         </HBox>
+                         <TextArea fx:id="quizDescription15" editable="false" prefHeight="90.0" wrapText="true" styleClass="text-input" text="Description" />
+                         <HBox alignment="CENTER_RIGHT">
+                            <children>
+                               <Button fx:id="quizAttempt15" mnemonicParsing="false" onAction="#attemptQuiz" styleClass="btn-primary" text="Attempt" />
+                            </children>
+                         </HBox>
+                      </children>
+                   </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

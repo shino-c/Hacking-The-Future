@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="@../../../CssStyle/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.createQuizController">
+   <children>
+      <HBox alignment="CENTER_LEFT" maxWidth="Infinity" minHeight="64.0" maxHeight="64.0" prefHeight="64.0" spacing="6.0" styleClass="nav-bar">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+               <image>
+                  <Image url="@../../../logowithoutbg.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#homeButton" styleClass="barItem" text="Home" />
+            <Button mnemonicParsing="false" onAction="#quizButton" styleClass="barItem,active" text="Quiz" />
+            <Button mnemonicParsing="false" onAction="#eventButton" styleClass="barItem" text="Event" />
+            <Button mnemonicParsing="false" onAction="#bookingButton" styleClass="barItem" text="Booking" />
+            <Button mnemonicParsing="false" onAction="#leaderBoardButton" styleClass="barItem" text="LeaderBoard" />
+            <Button mnemonicParsing="false" onAction="#profileButton" styleClass="barItem" text="Profile" />
+            <Button mnemonicParsing="false" onAction="#logOutButton" styleClass="barItem" text="Log Out" />
+         </children>
+         <padding>
+            <Insets bottom="6.0" right="12.0" top="6.0" />
+         </padding>
+      </HBox>
+      <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-center" text="Create Quiz">
+         <VBox.margin>
+            <Insets top="44.0" />
+         </VBox.margin>
+      </Text>
+      <VBox maxWidth="560.0" spacing="6.0" styleClass="card-solid">
+         <children>
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Title" />
+            <TextField fx:id="quizTitle" maxWidth="Infinity" prefHeight="38.0" promptText="Title" onKeyTyped="#quizTitleValidation" styleClass="text-input" />
+            <Text fx:id="quizTitleErrorMessage" fill="#c51b1b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="500.0" />
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Description (less than 50 words)">
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="quizDescription" maxWidth="Infinity" prefHeight="38.0" promptText="Description" onKeyTyped="#quizDescriptionValidation" styleClass="text-input" />
+            <Text fx:id="quizDescriptionErrorMessage" fill="#c51b1b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="500.0" />
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Theme">
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Text>
+            <SplitMenuButton fx:id="quizTheme" maxWidth="Infinity" prefHeight="38.0" mnemonicParsing="false" onAction="#quizThemeValidation" onKeyTyped="#quizThemeValidation" text="Select Theme" styleClass="choice-round" />
+            <Text fx:id="quizThemeErrorMessage" fill="#c51b1b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="500.0" />
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Content">
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="quizContent" maxWidth="Infinity" prefHeight="38.0" promptText="Quizizz Link" onKeyTyped="#quizContentValidation" styleClass="text-input" />
+            <Text fx:id="quizContentErrorMessage" fill="#c51b1b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="500.0" />
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#createQuiz" styleClass="btn-primary" text="Create Quiz">
+               <VBox.margin>
+                  <Insets bottom="8.0" top="16.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="22.0" left="24.0" right="24.0" top="22.0" />
+         </padding>
+         <VBox.margin>
+            <Insets top="16.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

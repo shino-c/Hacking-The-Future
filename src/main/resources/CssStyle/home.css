@@ -1,0 +1,422 @@
+/* ============================================================
+   HACKING THE FUTURE — shared design system
+   Soft pink theme, applied app-wide via CssStyle/home.css
+   ============================================================ */
+
+/* ---------- root backgrounds ---------- */
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #fff5f7, #ffe4ec);
+}
+
+/* ---------- top navigation bar ---------- */
+.nav-bar {
+    -fx-background-color: linear-gradient(to right, #fff5f7, #ffe4ec);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 0, 0.1, 0, 4);
+}
+
+.logo {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-padding: 6 10 6 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 6, 0.1, 0, 3);
+}
+
+/* nav buttons: uniform pill buttons, highlight is done by CSS class, not inline style */
+.barItem {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374a72;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-background-radius: 20;
+    -fx-padding: 10 18 10 18;
+    -fx-cursor: hand;
+    -fx-min-width: 96;
+    -fx-alignment: center;
+}
+
+.barItem:hover {
+    -fx-background-color: #ffd9e2;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* the page you are currently on */
+.barItem.active {
+    -fx-background-color: #fc6c85;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(252,108,133,0.45), 8, 0.1, 0, 3);
+}
+
+/* ---------- generic card ---------- */
+.card {
+    -fx-background-color: rgba(255,255,255,0.75);
+    -fx-background-radius: 20;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, rgba(55,74,114,0.12), 10, 0.05, 0, 4);
+}
+
+.card-solid {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, rgba(55,74,114,0.15), 10, 0.05, 0, 4);
+}
+
+/* ---------- headings ---------- */
+.title {
+    -fx-font-family: "Showcard Gothic";
+    -fx-font-size: 26px;
+    -fx-fill: #374a72;
+}
+
+.title-center {
+    -fx-font-family: "Showcard Gothic";
+    -fx-font-size: 26px;
+    -fx-fill: #374a72;
+    -fx-text-alignment: center;
+}
+
+.subtitle {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 16px;
+    -fx-fill: #374a72;
+}
+
+.body-text {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-fill: #5b6b8c;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+    -fx-background-color: linear-gradient(to right, #fc6c85, #e75480);
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14px;
+    -fx-background-radius: 24;
+    -fx-padding: 9 26 9 26;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(231,84,128,0.4), 8, 0.1, 0, 3);
+}
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to right, #ff8098, #f06a92);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.btn-primary:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.btn-secondary {
+    -fx-background-color: white;
+    -fx-text-fill: #e75480;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-background-radius: 24;
+    -fx-border-color: #fc6c85;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 24;
+    -fx-padding: 7 20 7 20;
+    -fx-cursor: hand;
+}
+.btn-secondary:hover {
+    -fx-background-color: #ffe4ec;
+}
+
+
+/* ---------- text input (TextField / TextArea / PasswordField) ---------- */
+.text-input, .input-round {
+    -fx-background-color: rgba(255,255,255,0.85);
+    -fx-background-radius: 14;
+    -fx-border-color: transparent;
+    -fx-border-radius: 14;
+    -fx-padding: 8 12 8 12;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(55,74,114,0.10), 6, 0.05, 0, 2);
+}
+.text-input:focused, .input-round:focused {
+    -fx-border-color: #fc6c85;
+    -fx-border-width: 1.5;
+}
+
+/* underline style inputs used on login/sign-up/forgot screens */
+.input-line {
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 12;
+    -fx-padding: 8 12 8 12;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+}
+.input-line:focused {
+    -fx-border-color: #fc6c85;
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+}
+
+/* ---------- choice boxes ---------- */
+.choice-round {
+    -fx-background-color: #fdf3f6;
+    -fx-background-radius: 12;
+    -fx-border-color: #f2a7bb;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 12;
+    -fx-mark-color: #e75480;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+}
+.choice-round:hover, .choice-round:focused {
+    -fx-border-color: #fc6c85;
+    -fx-background-color: white;
+}
+.choice-round .label {
+    -fx-text-fill: #374a72;
+    -fx-wrap-text: true;
+}
+.choice-round .open-arrow {
+    -fx-background-color: #e75480;
+}
+
+/* dropdown list panel of the choice box */
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.05, 0, 4);
+}
+.context-menu .menu-item .label {
+    -fx-text-fill: #374a72;
+}
+.context-menu .menu-item:focused .label {
+    -fx-text-fill: #e75480;
+    -fx-font-weight: bold;
+}
+.choice-round .label {
+    -fx-text-fill: #374a72;
+}
+.choice-round:hover {
+    -fx-background-color: white;
+}
+
+/* dropdown list panel of the choice box */
+.choice-box .context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.05, 0, 4);
+}
+
+/* ---------- home shortcut tiles ---------- */
+.tile-button {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #374a72;
+    -fx-graphic-text-gap: 10;
+    -fx-content-display: TOP;
+    -fx-padding: 18 10 18 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(55,74,114,0.12), 10, 0.05, 0, 4);
+}
+.tile-button:hover {
+    -fx-background-color: #fff0f4;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+.tile-button:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* ---------- forum / list rows ---------- */
+.forum-post {
+    -fx-background-color: #fadadd;
+    -fx-background-radius: 14;
+    -fx-padding: 12;
+    -fx-effect: dropshadow(gaussian, rgba(55,74,114,0.08), 8, 0.1, 0, 2);
+}
+.forum-post .text {
+    -fx-fill: #374a72;
+}
+
+.forum-header {
+    -fx-padding: 0 0 2 0;
+}
+.forum-username {
+    -fx-background-color: #fc6c85;
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 12px;
+    -fx-padding: 3 10 3 10;
+}
+.forum-date {
+    -fx-text-fill: #7a6b78;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 11px;
+}
+.forum-content {
+    -fx-text-fill: #374a72;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+}
+.forum-replies {
+    -fx-padding: 4 0 0 0;
+}
+.forum-reply {
+    -fx-background-color: rgba(255,255,255,0.55);
+    -fx-background-radius: 10;
+    -fx-border-color: #fc6c85;
+    -fx-border-width: 0 0 0 3;
+    -fx-border-radius: 10;
+    -fx-padding: 6 10 6 10;
+}
+.reply-username {
+    -fx-text-fill: #374a72;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.reply-date {
+    -fx-text-fill: #7a6b78;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 10px;
+}
+.reply-content {
+    -fx-text-fill: #374a72;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 12px;
+}
+
+.reply-btn {
+    -fx-background-color: #fc6c85;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 12px;
+    -fx-background-radius: 18;
+    -fx-padding: 4 16 4 16;
+    -fx-cursor: hand;
+}
+.reply-btn:hover {
+    -fx-background-color: #e75480;
+}
+
+/* ---------- scroll panes ---------- */
+.scroll-pane, .scroll-pane .viewport, .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-radius: 16;
+}
+
+/* ---------- event card chips ---------- */
+.chip-date, .chip-time-start, .chip-time-end, .chip-venue {
+    -fx-background-radius: 16;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-alignment: center;
+}
+.chip-date {
+    -fx-background-color: rgba(140, 200, 120, 0.35);
+    -fx-text-fill: #2d6a1f;
+}
+.chip-time-start {
+    -fx-background-color: rgba(255, 141, 93, 0.35);
+    -fx-text-fill: #b34a10;
+}
+.chip-time-end {
+    -fx-background-color: rgba(248, 151, 51, 0.4);
+    -fx-text-fill: #8a4a08;
+}
+.chip-venue {
+    -fx-background-color: rgba(255, 120, 178, 0.3);
+    -fx-text-fill: #b32060;
+}
+.badge-theme {
+    -fx-background-color: #ffd6e0;
+    -fx-background-radius: 16;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-alignment: center;
+    -fx-text-fill: #b32060;
+}
+.check .text {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14px;
+    -fx-fill: #374a72;
+}
+.check .box {
+    -fx-background-color: white;
+    -fx-border-color: #fc6c85;
+    -fx-border-width: 1.5;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+
+/* ---------- profile field chips & member rows ---------- */
+.field-chip {
+    -fx-background-color: #fdf3f6;
+    -fx-background-radius: 10;
+    -fx-padding: 6 12 6 12;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-text-fill: #374a72;
+}
+
+.member-row {
+    -fx-background-color: #fdf3f6;
+    -fx-background-radius: 12;
+}
+
+/* ---------- friend pages ---------- */
+.friend-side-button {
+    -fx-background-color: #efbbcc;
+    -fx-background-radius: 14;
+    -fx-text-fill: #374a72;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-padding: 12 18 12 18;
+    -fx-cursor: hand;
+}
+
+.friend-side-button:hover {
+    -fx-background-color: #e7a9bf;
+}
+
+.friend-side-button-active {
+    -fx-background-color: #f38fa9;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(243,143,169,0.35), 8, 0.1, 0, 3);
+}
+
+/* Main content area for friend pages - match root background */
+.friend-card {
+    -fx-background-color: rgba(255,255,255,0.72);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(55,74,114,0.12), 8, 0.05, 0, 3);
+    -fx-background-insets: 0,0,0 0 8 0;
+}
+
+/* ---------- misc hover helpers kept for old files ---------- */
+.side:hover {
+    -fx-background-color: #DBDBB3;
+    -fx-border-color: #DBDBB3;
+}
+.exit:hover {
+    -fx-border-color: #FE8EAC;
+    -fx-text-fill: #fc6c85;
+}
+.textarea {
+    -fx-background-color: rgba(53,89,119,0.4);
+}
+.textarea .scroll-pane {
+    -fx-background-color: transparent;
+}
+.textarea .scroll-pane .viewport,
+.textarea .scroll-pane .content {
+    -fx-background-color: transparent;
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="@../../../CssStyle/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.chooseEventController">
+   <top>
+      <HBox alignment="CENTER_LEFT" maxWidth="Infinity" minHeight="64.0" maxHeight="64.0" prefHeight="64.0" spacing="6.0" styleClass="nav-bar" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+               <image>
+                  <Image url="@../../../logowithoutbg.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#homeButton" styleClass="barItem" text="Home" />
+            <Button mnemonicParsing="false" onAction="#quizButton" styleClass="barItem" text="Quiz" />
+            <Button mnemonicParsing="false" onAction="#eventButton" styleClass="barItem,active" text="Event" />
+            <Button mnemonicParsing="false" onAction="#bookingButton" styleClass="barItem" text="Booking" />
+            <Button mnemonicParsing="false" onAction="#leaderBoardButton" styleClass="barItem" text="LeaderBoard" />
+            <Button mnemonicParsing="false" onAction="#profileButton" styleClass="barItem" text="Profile" />
+            <Button mnemonicParsing="false" onAction="#logOutButton" styleClass="barItem" text="Log Out" />
+         </children>
+         <padding>
+            <Insets bottom="6.0" right="12.0" top="6.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="30.0" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <Text fill="#374a72" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-center" text="Events">
+               <VBox.margin>
+                  <Insets top="44.0" />
+               </VBox.margin>
+            </Text>
+            <HBox alignment="CENTER" maxWidth="700.0" spacing="40.0">
+               <children>
+                  <Button maxWidth="260.0" mnemonicParsing="false" onAction="#createButton" styleClass="tile-button" text="Create Event">
+                     <graphic>
+                        <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../createIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button maxWidth="260.0" mnemonicParsing="false" onAction="#viewButton" styleClass="tile-button" text="View Events">
+                     <graphic>
+                        <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../viewIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
